@@ -20,6 +20,17 @@ use ImgManTest\Service\TestAsset\Container;
  */
 class ServiceTest extends ImageManagerTestCase
 {
+
+    public function setUp()
+    {
+        if (!extension_loaded('imagick')) {
+            $this->markTestSkipped(
+                'The imagick extension is not available.'
+            );
+        }
+    }
+
+
     public function testServiceConstruct()
     {
         /** @var $adapter ImagickAdapter */
@@ -97,7 +108,7 @@ class ServiceTest extends ImageManagerTestCase
         /** @var $pluginManager HelperPluginManager */
         /** @var $adapter ImagickAdapter */
         $service = new Service($storage, $pluginManager, $adapter);
-        $service->save('test/test', $image);
+        $service->save('invalidIdentifier?invalid', $image);
     }
 
     public function testServiceGetSet()
@@ -251,7 +262,7 @@ class ServiceTest extends ImageManagerTestCase
 
     public function testServiceGet()
     {
-        $containerStorage = $this->getMockForAbstractClass('ImgMan\Storage\Image\AbstractImageContainer');
+        $containerStorage = $this->getMockForAbstractClass('ImgMan\Storage\Image\AbstractStorageContainer');
 
         $storage =  $this->getMock('ImgMan\Storage\Adapter\Mongo\MongoAdapter');
         $storage->expects($this->any())

@@ -8,13 +8,13 @@
  */
 namespace ImgMan\Storage\Adapter\FileSystem\Image;
 
-use ImgMan\Storage\Image\AbstractImageContainer;
+use ImgMan\Storage\Image\AbstractStorageContainer;
 
 /**
  * Class ImageContainer
  * @package ImgMan\Storage\Adapter\FileSystem\Image
  */
-class ImageContainer extends AbstractImageContainer
+class ImageContainer extends AbstractStorageContainer
 {
     /**
      * @var string
@@ -22,9 +22,10 @@ class ImageContainer extends AbstractImageContainer
     protected $pathFile;
 
     /**
+     * Ctor
      * @param $pathFile
      */
-    function __construct($pathFile)
+    public function __construct($pathFile)
     {
         $this->pathFile = $pathFile;
     }
